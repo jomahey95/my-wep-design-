@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصميم داخلي الرياض | DYFV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f0f10;
+            --bg-soft: #151518;
+            --text: #f5f5f5;
+            --muted: #bdbdbd;
+            --gold: #d4af37;
+            --gold-dark: #b8962f;
+            --card: #1b1c20;
+            --border: #2a2b30;
+            --accent: #ffffff;
+            --container: 1200px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.8;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        /* Top bar */
+        .topbar {
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+        .topbar .container { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; }
+        .social-icons { display: flex; align-items: center; gap: 14px; }
+        .social-icon { font-size: 1.3rem; color: var(--text); opacity: 0.9; transition: .2s ease; }
+        .social-icon:hover { color: var(--gold); opacity: 1; transform: translateY(-2px); }
+
+        /* Header / Nav */
+        header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(15,15,16,0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav {
+            display: flex; align-items: center; justify-content: space-between; gap: 20px;
+            padding: 14px 0;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .5px; }
+        .brand .mark { width: 36px; height: 36px; background: var(--gold); border-radius: 6px; display: grid; place-items: center; color: #111; font-weight: 800; }
+        .brand span { font-size: 1.2rem; }
+        .language-toggle { cursor: pointer; border: 1px solid var(--border); padding: 8px 10px; border-radius: 8px; font-size: 1rem; background: var(--bg-soft); transition: .2s ease; }
+        .language-toggle:hover { background: var(--card); color: var(--gold); }
+
+        .navbar ul { list-style: none; display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; }
+        .navbar-item { position: relative; }
+        .navbar-item > a { color: var(--text); font-weight: 600; }
+        .navbar-item > a:hover { color: var(--gold); }
+        .dropdown { position: absolute; top: 120%; right: 0; display: none; background: var(--card); border: 1px solid var(--border); border-radius: 10px; min-width: 200px; overflow: hidden; }
+        .dropdown a { display: block; padding: 10px 14px; color: var(--muted); border-bottom: 1px solid var(--border); }
+        .dropdown a:hover { background: var(--bg-soft); color: var(--gold); }
+        .navbar-item:hover .dropdown { display: block; }
+
+        /* Hero */
+        .hero { position: relative; background: url('images-interior0.jpg') center/cover no-repeat; }
+        .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.75)); }
+        .hero-inner { position: relative; z-index: 1; min-height: 56vh; display: flex; align-items: flex-end; }
+        .hero-content { padding: 60px 0; width: 100%; }
+        .breadcrumb { color: var(--muted); font-size: .95rem; margin-bottom: 12px; }
+        .breadcrumb a { color: var(--muted); }
+        .breadcrumb a:hover { color: var(--gold); }
+        .hero h1 { margin: 0 0 10px; font-size: 2.4rem; font-weight: 800; }
+        .hero-sub { color: var(--muted); max-width: 750px; }
+
+        /* Sections */
+        section { padding: 60px 0; }
+        .section-title { font-size: 1.8rem; margin: 0 0 24px; font-weight: 800; }
+        .section-sub { color: var(--muted); margin: 0 0 28px; }
+
+        /* Services */
+        .cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 22px; border-radius: 14px; transition: .25s ease; height: 100%; }
+        .card:hover { transform: translateY(-4px); border-color: var(--gold-dark); }
+        .card-icon { width: 48px; height: 48px; border-radius: 10px; background: rgba(212,175,55,.15); color: var(--gold); display: grid; place-items: center; font-size: 24px; margin-bottom: 12px; }
+        .card h3 { margin: 8px 0 6px; font-size: 1.2rem; }
+        .card p { margin: 0; color: var(--muted); }
+
+        /* Portfolio */
+        .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+        .grid figure { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); }
+        .grid img { transition: .35s ease; aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+        .grid figure:hover img { transform: scale(1.06); filter: brightness(.9); }
+
+        /* Testimonials */
+        .testimonials { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+        .quote { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+        .quote p { margin: 0 0 12px; color: var(--muted); }
+        .quote .by { color: var(--text); font-weight: 700; }
+
+        /* CTA */
+        .cta { background: linear-gradient(90deg, rgba(212,175,55,.15), rgba(212,175,55,.05)); border: 1px solid var(--gold-dark); border-radius: 16px; padding: 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--gold); color: #111; background: var(--gold); font-weight: 800; }
+        .btn.secondary { background: transparent; color: var(--gold); }
+
+        /* Footer */
+        footer { background: var(--bg-soft); border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 24px; }
+        .foot-title { font-weight: 800; margin: 0 0 14px; }
+        .foot-list { margin: 0; padding: 0; list-style: none; color: var(--muted); }
+        .foot-list li { margin: 8px 0; }
+        .foot-list a:hover { color: var(--gold); }
+        .copyright { color: var(--muted); font-size: .95rem; border-top: 1px solid var(--border); padding-top: 16px; margin-top: 24px; }
+
+        /* Floating WhatsApp */
+        .whatsapp { position: fixed; bottom: 22px; left: 22px; width: 54px; height: 54px; display: grid; place-items: center; background: #25D366; color: #fff; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,.35); z-index: 60; }
+        .whatsapp:hover { transform: translateY(-3px); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .cards, .grid, .testimonials, .footer-grid { grid-template-columns: 1fr; }
+            .cta { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+      <div class="container">
+        <div>الرياض - المملكة العربية السعودية</div>
+        <div class="social-icons">
+            <a class="social-icon" href="https://www.instagram.com/jomahey/?hl=en" target="_blank" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+            <a class="social-icon" href="https://www.facebook.com/profile.php?id=61562814609408" target="_blank" aria-label="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+            <a class="social-icon" href="https://youtube.com/@jomaheymohamed5030?si=02uf85RE4LJo39TD" target="_blank" aria-label="YouTube"><ion-icon name="logo-youtube"></ion-icon></a>
+            <a class="social-icon" href="https://www.linkedin.com/in/hassan-alnoor-15a719195/" target="_blank" aria-label="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+            <a class="social-icon" href="https://www.snapchat.com/add/hassanalnoo2021?share_id=VAF2CduHrmU&locale=en-US" target="_blank" aria-label="Snapchat"><ion-icon name="logo-snapchat"></ion-icon></a>
+            <a class="social-icon" href="https://maps.app.goo.gl/pKYhUu8SCS6AqnHs7" target="_blank" aria-label="Location"><ion-icon name="location-outline"></ion-icon></a>
+            <a class="social-icon" href="mailto:jomahey@example.com" aria-label="Email"><ion-icon name="mail-outline"></ion-icon></a>
+            <a class="social-icon" href="https://www.pinterest.com/jomaheym95/" target="_blank" aria-label="Pinterest"><ion-icon name="logo-pinterest"></ion-icon></a>
+        </div>
+      </div>
+    </div>
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="mark">DY</div>
+          <span>Design Your Future Vision</span>
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li class="navbar-item">
+              <a href="#services">الخدمات</a>
+              <div class="dropdown">
+                <a href="#services">التصميم الداخلي</a>
+                <a href="#services">إدارة المشاريع</a>
+                <a href="#services">الإشراف والتنفيذ</a>
+              </div>
+            </li>
+            <li class="navbar-item">
+              <a href="#portfolio">أعمالنا</a>
+              <div class="dropdown">
+                <a href="#portfolio">سكني</a>
+                <a href="#portfolio">تجاري</a>
+                <a href="#portfolio">مكتبي</a>
+              </div>
+            </li>
+            <li class="navbar-item"><a href="#about">من نحن</a></li>
+            <li class="navbar-item"><a href="#contact">تواصل</a></li>
+          </ul>
+        </nav>
+        <div class="language-toggle" onclick="toggleLanguage()">🌐</div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <div class="breadcrumb"><a href="#">الرئيسية</a> / <span>التصميم الداخلي في الرياض</span></div>
+          <h1>شركة تصميم داخلي في الرياض</h1>
+          <p class="hero-sub">نقدم حلولاً إبداعية وفاخرة في التصميم الداخلي تعكس ذوقك وتجمع بين الجمال والوظيفية، بخبرة فريق متخصص في أحدث الاتجاهات العالمية.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">خدماتنا</h2>
+        <p class="section-sub">باقات متكاملة من الفكرة حتى التنفيذ بأعلى معايير الجودة.</p>
+        <div class="cards">
+          <div class="card">
+            <div class="card-icon"><ion-icon name="color-palette-outline"></ion-icon></div>
+            <h3>التصميم المفاهيمي</h3>
+            <p>تحويل رؤيتك إلى تصور بصري متكامل مع لوحات الألوان والمواد.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><ion-icon name="construct-outline"></ion-icon></div>
+            <h3>إدارة وتنفيذ</h3>
+            <p>إدارة سلسلة التوريد والإشراف على التنفيذ بدقة عالية.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon"><ion-icon name="cube-outline"></ion-icon></div>
+            <h3>نمذجة ثلاثية الأبعاد</h3>
+            <p>مشاهد واقعية تُمكّنك من استكشاف المساحة قبل التنفيذ.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+      <div class="container">
+        <h2 class="section-title">أعمال مختارة</h2>
+        <p class="section-sub">لمسات فاخرة في مشاريع سكنية وتجارية.</p>
+        <div class="grid">
+          <figure><img src="images-interior0.jpg" alt="مشروع 1"></figure>
+          <figure><img src="images-interior2.jpg" alt="مشروع 2"></figure>
+          <figure><img src="images-interior3.jpg" alt="مشروع 3"></figure>
+          <figure><img src="images-interior 4.jpg" alt="مشروع 4"></figure>
+          <figure><img src="images-interior7.jpg" alt="مشروع 5"></figure>
+          <figure><img src="images-interior8.jpg" alt="مشروع 6"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">ماذا يقول عملاؤنا</h2>
+        <div class="testimonials">
+          <div class="quote"><p>فريق محترف وذوق رفيع. النتيجة فاقت التوقعات.</p><div class="by">أ. نورة - الرياض</div></div>
+          <div class="quote"><p>التزام بالمواعيد وتفاصيل دقيقة في كل مرحلة.</p><div class="by">م. عبدالله - جدة</div></div>
+          <div class="quote"><p>تصاميم فاخرة وخدمة عملاء مميزة. أوصي بهم بشدة.</p><div class="by">سارة - الخبر</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h3 style="margin:0 0 6px;">ابدأ مشروعك الآن</h3>
+            <div class="section-sub" style="margin:0;">تواصل معنا لاستشارة مجانية وتقييم أولي لمشروعك.</div>
+          </div>
+          <div>
+            <a class="btn" href="https://wa.me/qr/CHXJ3JT5W3QTA1" target="_blank"><ion-icon name="logo-whatsapp"></ion-icon> واتساب</a>
+            <a class="btn secondary" href="#contact"><ion-icon name="call-outline"></ion-icon> اتصل بنا</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand" style="margin-bottom:10px;">
+              <div class="mark">DY</div>
+              <span>Design Your Future Vision</span>
+            </div>
+            <p class="section-sub">نصمم مساحات تُحاكي طموحك وتُبرز تفرّدك.</p>
+          </div>
+          <div>
+            <div class="foot-title">التنقل</div>
+            <ul class="foot-list">
+              <li><a href="#services">الخدمات</a></li>
+              <li><a href="#portfolio">أعمالنا</a></li>
+              <li><a href="#about">من نحن</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="foot-title">تواصل</div>
+            <ul class="foot-list">
+              <li><a href="mailto:jomahey@example.com">jomahey@example.com</a></li>
+              <li><a href="tel:+966500000000">+966 50 000 0000</a></li>
+              <li><a href="https://maps.app.goo.gl/pKYhUu8SCS6AqnHs7" target="_blank">الرياض، السعودية</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="foot-title">الشبكات</div>
+            <div class="social-icons">
+              <a class="social-icon" href="https://www.instagram.com/jomahey/?hl=en" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+              <a class="social-icon" href="https://www.facebook.com/profile.php?id=61562814609408" target="_blank"><ion-icon name="logo-facebook"></ion-icon></a>
+              <a class="social-icon" href="https://youtube.com/@jomaheymohamed5030?si=02uf85RE4LJo39TD" target="_blank"><ion-icon name="logo-youtube"></ion-icon></a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">© <span id="year"></span> DYFV - جميع الحقوق محفوظة</div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a class="whatsapp" href="https://wa.me/qr/CHXJ3JT5W3QTA1" target="_blank" aria-label="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        // Simple year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Language toggle (updates header/nav only for now)
+        function toggleLanguage() {
+            const translations = {
+                ar: {
+                    services: "الخدمات",
+                    works: "أعمالنا",
+                    about: "من نحن",
+                    contact: "تواصل",
+                },
+                en: {
+                    services: "Services",
+                    works: "Portfolio",
+                    about: "About",
+                    contact: "Contact",
+                }
+            };
+
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = newLang;
+            document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
+
+            const t = translations[newLang];
+            const items = document.querySelectorAll('.navbar-item > a');
+            if (items.length >= 4) {
+              items[0].textContent = t.services;
+              items[1].textContent = t.works;
+              items[2].textContent = t.about;
+              items[3].textContent = t.contact;
+            }
+        }
+    </script>
+</body>
+</html>
